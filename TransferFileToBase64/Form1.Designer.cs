@@ -33,6 +33,8 @@
 			panel2 = new Panel();
 			rtbBase64View = new RichTextBox();
 			panel1 = new Panel();
+			panel6 = new Panel();
+			btnExportTxt = new Button();
 			pbFileToBase64 = new ProgressBar();
 			panel4 = new Panel();
 			btnCopy = new Button();
@@ -53,6 +55,7 @@
 			tpFileToBase64.SuspendLayout();
 			panel2.SuspendLayout();
 			panel1.SuspendLayout();
+			panel6.SuspendLayout();
 			panel4.SuspendLayout();
 			panel3.SuspendLayout();
 			tpBase64ToFile.SuspendLayout();
@@ -108,6 +111,7 @@
 			// 
 			// panel1
 			// 
+			panel1.Controls.Add(panel6);
 			panel1.Controls.Add(pbFileToBase64);
 			panel1.Controls.Add(panel4);
 			panel1.Controls.Add(panel3);
@@ -116,6 +120,33 @@
 			panel1.Name = "panel1";
 			panel1.Size = new Size(1124, 56);
 			panel1.TabIndex = 0;
+			// 
+			// panel6
+			// 
+			panel6.AutoSize = true;
+			panel6.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+			panel6.Controls.Add(btnExportTxt);
+			panel6.Dock = DockStyle.Left;
+			panel6.Location = new Point(262, 0);
+			panel6.Name = "panel6";
+			panel6.Size = new Size(144, 56);
+			panel6.TabIndex = 3;
+			// 
+			// btnExportTxt
+			// 
+			btnExportTxt.AutoSize = true;
+			btnExportTxt.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+			btnExportTxt.BackColor = Color.DodgerBlue;
+			btnExportTxt.FlatStyle = FlatStyle.Popup;
+			btnExportTxt.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point);
+			btnExportTxt.ForeColor = Color.White;
+			btnExportTxt.Location = new Point(9, 12);
+			btnExportTxt.Name = "btnExportTxt";
+			btnExportTxt.Size = new Size(132, 32);
+			btnExportTxt.TabIndex = 2;
+			btnExportTxt.Text = "Export to txt";
+			btnExportTxt.UseVisualStyleBackColor = false;
+			btnExportTxt.Click += btnExportTxt_Click;
 			// 
 			// pbFileToBase64
 			// 
@@ -185,10 +216,10 @@
 			tpBase64ToFile.Controls.Add(panel5);
 			tpBase64ToFile.Font = new Font("Tahoma", 10F, FontStyle.Bold, GraphicsUnit.Point);
 			tpBase64ToFile.ForeColor = SystemColors.ControlText;
-			tpBase64ToFile.Location = new Point(4, 31);
+			tpBase64ToFile.Location = new Point(4, 34);
 			tpBase64ToFile.Name = "tpBase64ToFile";
 			tpBase64ToFile.Padding = new Padding(3);
-			tpBase64ToFile.Size = new Size(1130, 675);
+			tpBase64ToFile.Size = new Size(1130, 672);
 			tpBase64ToFile.TabIndex = 1;
 			tpBase64ToFile.Text = "Base64 to File";
 			tpBase64ToFile.UseVisualStyleBackColor = true;
@@ -199,7 +230,7 @@
 			panel8.Dock = DockStyle.Fill;
 			panel8.Location = new Point(3, 59);
 			panel8.Name = "panel8";
-			panel8.Size = new Size(1124, 613);
+			panel8.Size = new Size(1124, 610);
 			panel8.TabIndex = 2;
 			// 
 			// rtbBase64
@@ -207,7 +238,7 @@
 			rtbBase64.Dock = DockStyle.Fill;
 			rtbBase64.Location = new Point(0, 0);
 			rtbBase64.Name = "rtbBase64";
-			rtbBase64.Size = new Size(1124, 613);
+			rtbBase64.Size = new Size(1124, 610);
 			rtbBase64.TabIndex = 0;
 			rtbBase64.Text = "";
 			// 
@@ -309,6 +340,8 @@
 			panel2.ResumeLayout(false);
 			panel1.ResumeLayout(false);
 			panel1.PerformLayout();
+			panel6.ResumeLayout(false);
+			panel6.PerformLayout();
 			panel4.ResumeLayout(false);
 			panel4.PerformLayout();
 			panel3.ResumeLayout(false);
@@ -349,5 +382,7 @@
 		private ProgressBar pbBase64ToFile;
 		private Panel panel9;
 		private Label label1;
+		private Panel panel6;
+		private Button btnExportTxt;
 	}
 }

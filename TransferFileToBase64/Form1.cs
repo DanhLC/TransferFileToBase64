@@ -97,5 +97,40 @@ namespace TransferFileToBase64
 				MessageBox.Show(ex.Message);
 			}
 		}
+
+		private async void btnExportTxt_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (string.IsNullOrEmpty(rtbBase64.Text.Trim())) throw new Exception("No data in text box available for export");
+
+				using (var saveFileDialog = new SaveFileDialog())
+				{
+					saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+					saveFileDialog.DefaultExt = "txt";
+					saveFileDialog.AddExtension = true;
+					saveFileDialog.Title = "Choose location to export file";
+					saveFileDialog.FileName = string.Format("ExportedHistory_{0:ddMMyyyy}_{0:hhMMsss}.txt", DateTime.Now);
+
+					if (saveFileDialog.ShowDialog() == DialogResult.OK)
+					{
+						SetAllButtonsEnabled(false);
+
+						pbFileToBase64.Style = ProgressBarStyle.Marquee;
+						pbFileToBase64.Visible = true;
+
+						await System.IO.File.WriteAllTextAsync(saveFileDialog.FileName, rtbBase64View.Text);
+
+						pbFileToBase64.Visible = false;
+						SetAllButtonsEnabled(true);
+						MessageBox.Show("Export successfully!", "Notify", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error reading log: " + ex.Message);
+			}
+		}
 	}
 }
