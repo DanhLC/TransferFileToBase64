@@ -22,10 +22,17 @@ namespace TransferFileToBase64
 					{
 						pbFileToBase64.Style = ProgressBarStyle.Marquee;
 						pbFileToBase64.Visible = true;
+						var base64String = string.Empty;
 
-						var fileBytes = await Task.Run(() => System.IO.File.ReadAllBytes(openFileDialog.FileName));
-						var base64String = await Task.Run(() => Convert.ToBase64String(fileBytes));
-
+						try
+						{
+							var fileBytes = await Task.Run(() => System.IO.File.ReadAllBytes(openFileDialog.FileName));
+							base64String = await Task.Run(() => Convert.ToBase64String(fileBytes));
+						}
+						catch
+						{
+							throw new Exception("File too large to create base 64");
+						}
 						Clipboard.SetText(base64String);
 						rtbBase64View.Text = base64String;
 						pbFileToBase64.Visible = false;
@@ -38,6 +45,8 @@ namespace TransferFileToBase64
 			}
 			catch (Exception ex)
 			{
+				pbFileToBase64.Visible = false;
+				SetAllButtonsEnabled(true);
 				MessageBox.Show(ex.Message);
 			}
 		}
@@ -102,7 +111,7 @@ namespace TransferFileToBase64
 		{
 			try
 			{
-				if (string.IsNullOrEmpty(rtbBase64.Text.Trim())) throw new Exception("No data in text box available for export");
+				if (string.IsNullOrEmpty(rtbBase64View.Text.Trim())) throw new Exception("No data in text box available for export");
 
 				using (var saveFileDialog = new SaveFileDialog())
 				{
