@@ -26,6 +26,7 @@ namespace TransferFileToBase64
 
 						try
 						{
+							//<a href="data:application/octet-stream;base64,${base64String}" target="_blank" download="${file.name}">${file.name}</a>
 							var fileBytes = await Task.Run(() => System.IO.File.ReadAllBytes(openFileDialog.FileName));
 							base64String = await Task.Run(() => Convert.ToBase64String(fileBytes));
 						}
